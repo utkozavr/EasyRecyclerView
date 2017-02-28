@@ -222,39 +222,7 @@ public class EasyRecyclerView extends FrameLayout {
                     setHorizontalScrollBarEnabled(false);
                     break;
             }
-/*
-            RecyclerView.OnFlingListener onFlingListener = new RecyclerView.OnFlingListener() {
-                @Override
-                public boolean onFling(int velocityX, int velocityY) {
-                    mVelocityX = velocityX;
-                    mVelocityY = velocityY;
-                    return false;
-                }
-            };
 
-            mRecycler.setOnFlingListener(onFlingListener);
-
-
-
-
-            mRecycler.addOnItemTouchListener(new RecyclerView.OnItemTouchListener() {
-                @Override
-                public boolean onInterceptTouchEvent(RecyclerView rv, MotionEvent e) {
-                    log("onInterceptTouchEvent!!!!!!!!!!!!");
-                    return false;
-                }
-
-                @Override
-                public void onTouchEvent(RecyclerView rv, MotionEvent e) {
-                    log("onTouchEvent!!!!!!!!!!");
-                }
-
-                @Override
-                public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
-
-                }
-            });
-*/
         }
     }
 
@@ -512,6 +480,21 @@ public class EasyRecyclerView extends FrameLayout {
         mRecycler.removeItemDecoration(itemDecoration);
     }
 
+    public void setScrollDistanceTrigger(int scrollDistanceTrigger) {
+        mRecycler.setScrollDistanceTrigger(scrollDistanceTrigger);
+    }
+
+    public void setScrollDistance(int scrollDistance) {
+        mRecycler.setScrollDistance(scrollDistance);
+    }
+
+    public int getScrollDistanceTrigger() {
+        return mRecycler.getScrollDistanceTrigger();
+    }
+
+    public int getScrollDistance() {
+        return mRecycler.getScrollDistance();
+    }
 
     /**
      * @return inflated error view or null
