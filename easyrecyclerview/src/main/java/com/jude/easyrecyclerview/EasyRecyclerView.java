@@ -16,12 +16,12 @@ import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.jude.easyrecyclerview.swipe.SwipeRefreshLayout;
 
 import java.util.ArrayList;
-
+import com.jude.easyrecyclerview.extRecyclerView;
 
 public class EasyRecyclerView extends FrameLayout {
     public static final String TAG = "EasyRecyclerView";
     public static boolean DEBUG = false;
-    protected RecyclerView mRecycler;
+    protected extRecyclerView mRecycler;
     protected ViewGroup mProgressView;
     protected ViewGroup mEmptyView;
     protected ViewGroup mErrorView;
@@ -37,6 +37,9 @@ public class EasyRecyclerView extends FrameLayout {
     protected int mPaddingRight;
     protected int mScrollbarStyle;
     protected int mScrollbar;
+
+    protected int mVelocityX;
+    protected int mVelocityY;
 
     protected RecyclerView.OnScrollListener mInternalOnScrollListener;
     protected RecyclerView.OnScrollListener mExternalOnScrollListener;
@@ -166,7 +169,7 @@ public class EasyRecyclerView extends FrameLayout {
      * Implement this method to customize the AbsListView
      */
     protected void initRecyclerView(View view) {
-        mRecycler = (RecyclerView) view.findViewById(android.R.id.list);
+        mRecycler = (extRecyclerView) view.findViewById(android.R.id.list);
         setItemAnimator(null);
         if (mRecycler != null) {
             mRecycler.setHasFixedSize(true);
@@ -185,7 +188,15 @@ public class EasyRecyclerView extends FrameLayout {
 
                 @Override
                 public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+
                     super.onScrollStateChanged(recyclerView, newState);
+/*
+                    if(newState == 2){
+                        log("mVelocityX: " + String.valueOf(mVelocityX));
+                        log("mVelocityY: " + String.valueOf(mVelocityY));
+                        recyclerView.setLayoutFrozen(true);
+                    }
+*/
                     if (mExternalOnScrollListener != null)
                         mExternalOnScrollListener.onScrollStateChanged(recyclerView, newState);
                     for (RecyclerView.OnScrollListener listener : mExternalOnScrollListenerList) {
@@ -211,6 +222,39 @@ public class EasyRecyclerView extends FrameLayout {
                     setHorizontalScrollBarEnabled(false);
                     break;
             }
+/*
+            RecyclerView.OnFlingListener onFlingListener = new RecyclerView.OnFlingListener() {
+                @Override
+                public boolean onFling(int velocityX, int velocityY) {
+                    mVelocityX = velocityX;
+                    mVelocityY = velocityY;
+                    return false;
+                }
+            };
+
+            mRecycler.setOnFlingListener(onFlingListener);
+
+
+
+
+            mRecycler.addOnItemTouchListener(new RecyclerView.OnItemTouchListener() {
+                @Override
+                public boolean onInterceptTouchEvent(RecyclerView rv, MotionEvent e) {
+                    log("onInterceptTouchEvent!!!!!!!!!!!!");
+                    return false;
+                }
+
+                @Override
+                public void onTouchEvent(RecyclerView rv, MotionEvent e) {
+                    log("onTouchEvent!!!!!!!!!!");
+                }
+
+                @Override
+                public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
+
+                }
+            });
+*/
         }
     }
 

@@ -16,6 +16,8 @@
 
 package com.jude.easyrecyclerview.swipe;
 
+import com.jude.easyrecyclerview.extRecyclerView;
+
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.support.annotation.ColorInt;
@@ -592,7 +594,7 @@ public class SwipeRefreshLayout extends FrameLayout implements NestedScrollingPa
         if (mTarget == null) {
             for (int i = 0; i < getChildCount(); i++) {
                 View child = getChildAt(i);
-                if (child.getClass().isAssignableFrom(RecyclerView.class)) {
+                if (child.getClass().isAssignableFrom(extRecyclerView.class)) {
                     mTarget = child;
                     break;
                 }
